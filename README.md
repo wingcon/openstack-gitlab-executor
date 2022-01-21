@@ -1,5 +1,10 @@
-# GitLab CI Openstack executor
+# This is a fork of RedHatQE/openstack-gitlab-executor
 
+This work is based on https://github.com/RedHatQE/openstack-gitlab-executor - many thanks!
+Since I changed the Dockerfile to be ubuntu instead of redhat based I do not expect a complete upstream merge.
+Beside this change there are however some mostly minor improvements made which I hope to get upstreamed at some point.
+
+# GitLab CI Openstack executor
 GitLab CI doesn't support Openstack as an executor but provides the ability to implement your own
 executor by using scripts to provision, run, and clean up CI environment. This repository contains
 such scripts as well as a Containerfile to build and configure a container image with Gitlab Runner
@@ -8,7 +13,7 @@ that uses custom Openstack executor.
 ## Building
 
 ```sh
-git clone https://github.com/RedHatQE/openstack-gitlab-executor.git
+git clone https://github.com/wingcon/openstack-gitlab-executor.git
 cd openstack-gitlab-executor
 podman build --build-arg GITLAB_RUNNER_VERSION=<version> -f Dockerfile -t openstack-gitlab-runner
 #or with docker
@@ -118,10 +123,18 @@ Run a container:
 
 ```sh
 podman run -it \
-           -e PRIVATE_KEY="$(cat <private key filename>)"
-           --env-file=env.txt \
-           -v ~/runner.toml:/home/gitlab-runner/.gitlab-runner/config.toml
-           quay.io/redhatqe/openstack-gitlab-runner:latest
+          -e PRIVATE_KEY="$(cat <private key filename>)"
+          --env-file=env.txt \
+          -v ~/runner.toml:/home/gitlab-runner/.gitlab-runner/config.toml
+          wingcon/openstack-gitlab-runner:latest
+#it may make sense to use it with persistent cache and build dir as volume
+docker run -ti \
+          -e PRIVATE_KEY="$(cat <private key filename>)" \
+          --env-file=env.txt \
+          -v ~/runner.toml:/home/gitlab-runner/.gitlab-runner/config.toml \
+          -v /builds
+          -v /cache
+          --rm wingcon/openstack-gitlab-runner:latest
 ```
 
 You can override instance configuration defaults by providing environment variables in a GitLab CI
