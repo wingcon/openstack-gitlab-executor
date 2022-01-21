@@ -10,7 +10,9 @@ that uses custom Openstack executor.
 ```sh
 git clone https://github.com/RedHatQE/openstack-gitlab-executor.git
 cd openstack-gitlab-executor
-podman build --build-arg GITLAB_RUNNER_VERSION=<version> -f Containerfile -t openstack-gitlab-runner
+podman build --build-arg GITLAB_RUNNER_VERSION=<version> -f Dockerfile -t openstack-gitlab-runner
+#or with docker
+docker build --build-arg GITLAB_RUNNER_VERSION=<version> -t openstack-gitlab-runner .
 ```
 
 ## Configuration
