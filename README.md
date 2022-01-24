@@ -26,6 +26,8 @@ The container expects the following environment variables:
 
 ### Instance variables
 
+`GITLAB_RUNNER_VERSION` - the gitlab runner version to install within the VM for artifact and cache handling
+
 `FLAVOR` - Default instance flavor reference
 
 `BUILDER_IMAGE` - Default image to use for instance provisioning

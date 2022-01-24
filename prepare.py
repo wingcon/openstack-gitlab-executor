@@ -60,6 +60,16 @@ def check_ssh(ip: str) -> None:
             )
 
     connect()
+    stdin, stdout, stderr = ssh_client.exec_command("/bin/bash")
+    with open('/home/gitlab-runner/prepare-vm.sh') as f:
+        stdin.channel.send(f.read())
+        stdin.channel.shutdown_write()
+    for line in iter(lambda: stdout.readline(2048), ""):
+        print(line, sep="", end="", flush=True)
+    exit_status = stdout.channel.recv_exit_status()
+    if exit_status != 0:
+        for line in iter(lambda: stderr.readline(2048), ""):
+            print(line, sep="", end="", flush=True)
     ssh_client.close()
 
 

@@ -27,7 +27,7 @@ COPY requirements.txt $HOME/
 RUN python3.8 -m venv $VENV && \
     pip install -r requirements.txt
 
-COPY cleanup.py env.py config.sh prepare.py run.py start.sh $HOME/
+COPY cleanup.py env.py config.sh prepare.py run.py start.sh prepare-vm.sh $HOME/
 
 RUN chgrp -R 0 $HOME && \
     chmod +x cleanup.py config.sh prepare.py run.py start.sh && \
