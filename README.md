@@ -42,6 +42,8 @@ The container expects the following environment variables:
 
 `PRIVATE_KEY` - Private key content
 
+`PRIVATE_KEY_PATH` - Private key path in case you add it as secret into the container
+
 `PASSWORD`  - Password in case you do not use a private key (not recommended)
 
 `PASSPHRASE` - Passphrase to your private key

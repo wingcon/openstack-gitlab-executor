@@ -9,7 +9,7 @@ KEY_PAIR_NAME = os.getenv("CUSTOM_ENV_KEY_PAIR_NAME") or os.getenv("KEY_PAIR_NAM
 SECURITY_GROUP = os.getenv("CUSTOM_ENV_SECURITY_GROUP") or os.getenv("SECURITY_GROUP")
 USERNAME = os.getenv("CUSTOM_ENV_USERNAME") or os.getenv("USERNAME")
 PASSWORD = os.getenv("CUSTOM_ENV_PASSWORD") or os.getenv("PASSWORD")
-PRIVATE_KEY_PATH = f"{os.getenv('HOME')}/priv_key"
+PRIVATE_KEY_PATH = os.getenv("PRIVATE_KEY_PATH") or f"{os.getenv('HOME')}/priv_key"
 PASSPHRASE = os.getenv("CUSTOM_ENV_PASSPHRASE") or os.getenv("PASSPHRASE")
 
 BUILD_FAILURE_EXIT_CODE = os.getenv("BUILD_FAILURE_EXIT_CODE")
